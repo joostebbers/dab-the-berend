@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dab the Berend</title>
+		<meta name="viewport" content="width=device-width">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+		<style>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			body { background:#000000;color:#ffffff;font-family:sans-serif;}
+			.colfull { width:600px;}
+			.auto { margin:auto;}
+
+			img { display:block;margin:0;}
+			
+			label { display:inline-block;font-size:22px;}
+			input { border:0px;background:transparent;border-bottom:3px solid #ffffff;font-size:22px;color:#ffffff;text-align:center;}
+			input:focus { outline:none;}
+
+			#dab-wrap { text-align:center;height:600px;width:600px;position:relative;margin-bottom:50px;display:none;}
+			#dab-wrap img { position:absolute;top:0px;left:0px;}
+			#dab-wrap .dab2 { z-index:2;}
+			#dab-wrap.dab .dab2 { display:none;}
+			
+			#dab-video { position:relative;height:400px;width:600px;margin-bottom:50px;}
+			#dab-video img { position:absolute;top:0px;left:0px;display:none;}
+			#dab-video img.on { z-index:2;display:block;}
+			#dab-video #stretcher { display:block !important;position:relative;}
+
+			#loginform { margin-top:260px;text-align:center;}
+			#mainpage { display:none;text-align:center;margin-top:150px;}
+
+			#log { position:fixed;height:100%;top:0px;left:0px;z-index:2;border-right:3px solid #ccc;padding:20px;overflow-y:scroll;text-align:left;}
+			#log li { list-style:none;line-height:1.5em;font-size:14px;color:#999;}
+			#log li.first { color:#ffffff;}
+
+			.button { background:#ffffff;font-size:22px;border:3px solid #ffffff;padding:7px 15px;transition:all 0.1s ease;}
+			.button:hover { background:#cccccc;cursor:pointer;}
+
+			@media handheld, screen and (max-width: 680px) {
+				#mainpage { margin-top:0px;}
+				#dab-video { width:100%;height:auto;}
+				#dab-video img { width:100%;height:auto;}
+				.colfull { width:100%;}
+				#loginform { margin-top:50px; }
+				input { padding:10px 20px;margin:50px 0px;}
+				.button { width:80%;font-size:28px;text-transform:uppercase;padding:10px 20px;}
+				#log { position:relative;width:100%;border:3px solid #ffffff;margin-top:50px;}
+			}
+		</style>
+	</head>
+	<body>	
+		<div id="loginform">
+			<div class="colfull auto">
+				<form>
+					<label for="nickname">Nickname</label>
+					<input name="nickname" id="nickname" type="text" autofocus/>
+					<button type="submit" class="button">Join</button>
+				</form>
+			</div>
+		</div>
+		<div id="mainpage">
+			<div class="colfull auto">
+				<div id="dab-wrap">
+					<img class="dab1" src="/images/dab1.jpg"/>
+					<img class="dab2" src="/images/dab2.jpg"/>
+				</div>
+
+				<div id="dab-video">
+					<script type="text/javascript">
+						function pad(number, length) {
+							var str = '' + number;
+							while (str.length < length) {
+								str = '0' + str;
+							}
+							return str;
+						}
+						for(var i=0;i<23;i++) {
+							document.write('<img id="img_'+pad(i, 5)+'" height="400" width="600" class="videoFrame'+((i === 0) ? ' on' : '')+'" src="/frames/hq/Berend_'+pad(i, 5)+'.png"/>');
+						}
+					</script>
+					<img id="stretcher" src="/images/stretcher.png"/>
+				</div>
+
+				<button id="do_dab" class="button">DAB!</button>
+
+				<div id="log">
+					<ul></ul>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+		<script src="/js/fuze-dab.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			$('#dab-wrap').fuze_dab();
+		</script>
+	</body>
+</html>
